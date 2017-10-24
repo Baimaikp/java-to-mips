@@ -11,8 +11,10 @@ public class Test {
 	public static void main(String args[]) {
 		String LtorMt = null;
 		String AorS = null;
+		String[] $s = { "$s0", "$s1", "$s2", "$s4","$s5","$s6","$s7","$s8","$s9" };
+		int value = 0;
 
-		String path = "C:\\Users\\thawatkrit\\Desktop\\testwhile.txt";
+		String path = "C:\\Users\\thawatkrit\\Desktop\\mips.txt";
 		File file = new File(path);
 
 		try {
@@ -20,23 +22,13 @@ public class Test {
 			String line;
 			while ((line = br.readLine()) != null) {
 				if (line.contains("int")) {
-					for (int i = 1; i < line.length() - 1; i++) {
-						if ((line.charAt(i) == 'a') && (line.charAt(i + 1) == '=')) {
-							System.out.println("\tlw $s0," + line.substring(i, i + 1));
-						}
-					}
-					for (int i = 1; i < line.length() - 1; i++) {
-						if ((line.charAt(i) == 'b') && (line.charAt(i + 1) == '=')) {
-							System.out.println("\tlw $s1," + line.substring(i, i + 1));
-						}
-					}
-					for (int i = 1; i < line.length() - 1; i++) {
-						if ((line.charAt(i) == 'c') && (line.charAt(i + 1) == '=')) {
-							System.out.println("\tlw $s2," + line.substring(i, i + 1));
-						}
-					}
+					
+					System.out.printf("\tlw %s,\n", $s[value]);
+					value++;
+					
 				}
 				if (line.startsWith("while") == true) {
+					
 					for (int i = 1; i < line.length() - 1; i++) {
 						if ((line.charAt(i) == '>')) {
 							LtorMt = "bgt";
@@ -44,7 +36,7 @@ public class Test {
 							LtorMt = "blt";
 						}
 					}
-					System.out.println("loop0 : " + LtorMt + " $s0,$s1" + ",loop1");
+					System.out.printf("loop0 : " + LtorMt + " %s,%s",$s[value],$s[value] + ",loop1\n");
 					System.out.println("\tj out");
 
 				}
@@ -54,9 +46,9 @@ public class Test {
 					AorS = "sub";
 				}
 
-				if (line.contains("a") && line.contains("b") && line.contains("c")) {
-					System.out.println("loop1 : " + AorS + " $s0,$s1,$s2");
-					System.out.println("\tsw $s0,a");
+				if (line.contains("=") && (line.contains("+") || line.contains("-"))) {
+					System.out.printf("loop1 : " + AorS + " %s,%s,%s\n",$s[value],$s[value],$s[value]);
+					System.out.printf("\tsw %s,\n",$s[value]);
 				}
 
 			}
@@ -69,6 +61,11 @@ public class Test {
 
 		}
 
+	}
+
+	private static String charAt(int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
