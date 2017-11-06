@@ -3,5 +3,6 @@ int b=1
 int c=2
 while(a>b){
 	a=b+c;
+	b=a+c;
 }
 
